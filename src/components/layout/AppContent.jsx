@@ -1,6 +1,8 @@
-import { Layout, Divider, List, Typography, Spin} from 'antd';
+import { Layout, Divider, List, Typography, Spin, Space, Input} from 'antd';
 import { useEffect, useState } from 'react';
 import { fakeFetch } from '../../api';
+
+const { Search } = Input;
 
 const contentStyle = {
     textAlign: 'center',
@@ -9,6 +11,8 @@ const contentStyle = {
     backgroundColor: '#FFFFFF',
     padding: '1rem'
   };
+
+const onSearch = (value, _e, info) => console.log(info?.source, value);
 
 export default function AppContent() {
     const [loading, setLoading] = useState(false);
@@ -29,9 +33,13 @@ export default function AppContent() {
     if (loading) {
         return <Spin fullscreen/>
     }
-    
+
     return (
         <Layout.Content style={contentStyle}>
+            <Space direction="vertical">
+                <Search placeholder="Введите адрес" onSearch={onSearch} enterButton />
+            </Space>
+            
             <Divider orientation="left">Объекты учета</Divider>
             <List
                 size="small"

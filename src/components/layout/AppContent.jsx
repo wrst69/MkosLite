@@ -39,14 +39,13 @@ export default function AppContent() {
             <Space direction="vertical">
                 <Search placeholder="Введите адрес" onSearch={onSearch} enterButton />
             </Space>
-            
             <Divider orientation="left">Объекты учета</Divider>
             <List
                 size="small"
                 dataSource={objects}
                 renderItem={(item) => (
                     <List.Item>
-                        <Typography.Text mark>[ITEM]</Typography.Text> {item.name}
+                        <Typography.Text>{item.name}</Typography.Text> 
                      </List.Item>
                 )}
             />

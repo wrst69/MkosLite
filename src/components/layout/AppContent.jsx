@@ -1,5 +1,5 @@
 import { Layout, Divider, List, Typography, Spin, Space, Input} from 'antd';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { fakeFetch } from '../../api';
 
 const { Search } = Input;
@@ -12,12 +12,13 @@ const contentStyle = {
     padding: '1rem'
   };
 
-const onSearch = (value, _e, info) => console.log(info?.source, value);
+
 
 export default function AppContent() {
-    const [loading, setLoading] = useState(false);
+    //const { loading, objects } = useContext(DataContextProvider);
+    const [loading, setLoading] = useState(false)
     const [objects, setObjects] = useState([]);
-
+    
     useEffect(() => {
         async function preload() {
             setLoading(true);
@@ -30,15 +31,14 @@ export default function AppContent() {
         preload();
     }, [])
 
+    console.log(objects);
+
     if (loading) {
         return <Spin fullscreen/>
     }
 
     return (
         <Layout.Content style={contentStyle}>
-            <Space direction="vertical">
-                <Search placeholder="Введите адрес" onSearch={onSearch} enterButton />
-            </Space>
             <Divider orientation="left">Объекты учета</Divider>
             <List
                 size="small"
@@ -46,7 +46,7 @@ export default function AppContent() {
                 renderItem={(item) => (
                     <List.Item>
                         <Typography.Text>{item.name}</Typography.Text> 
-                     </List.Item>
+                    </List.Item>
                 )}
             />
         </Layout.Content>
